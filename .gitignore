@@ -2,6 +2,7 @@
 .vs/
 
 *.pdb
+*.log
 # Compiled Object files
 *.slo
 *.lo
