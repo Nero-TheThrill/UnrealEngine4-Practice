@@ -3,6 +3,8 @@
 
 *.pdb
 *.log
+*.exp
+
 # Compiled Object files
 *.slo
 *.lo
