@@ -39,6 +39,7 @@ AFountain::AFountain()
 	{
 		Splash->SetTemplate(PS_SPLASH.Object);
 	}
+	RotateSpeed = 30.0f;
 }
 
 // Called when the game starts or when spawned
@@ -66,6 +67,7 @@ void AFountain::PostInitializeComponents()
 void AFountain::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	AddActorLocalRotation(FRotator(0.0f, RotateSpeed * DeltaTime, 0.0f));
 
 }
 
