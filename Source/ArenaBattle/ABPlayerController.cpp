@@ -19,6 +19,6 @@ void AABPlayerController::BeginPlay()
 {
     Super::BeginPlay();
 
-    FInputModeGameOnly InputMode;
-    SetInputMode(InputMode);
+    //FInputModeGameOnly InputMode;
+    //SetInputMode(InputMode);
 }
