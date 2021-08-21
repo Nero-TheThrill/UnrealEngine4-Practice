@@ -19,7 +19,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	void SetControlMode(int32 ControlMode);
+	enum class EControlMode
+	{
+	    GTA,
+		DIABLO
+	};
+
+	void SetControlMode(EControlMode ControlMode);
+	EControlMode CurrentControlMode = EControlMode::GTA;
+	FVector DirectionToMove = FVector::ZeroVector;
 
 public:	
 	// Called every frame
@@ -39,4 +47,5 @@ public:
 		void LeftRight(float NewAxisValue);
 		void LookUp(float NewAxisValue);
 		void Turn(float NewAxisValue);
+		void ViewChange();
 };
