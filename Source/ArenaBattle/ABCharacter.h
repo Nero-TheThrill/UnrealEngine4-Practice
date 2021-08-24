@@ -30,6 +30,7 @@ protected:
 	FVector DirectionToMove = FVector::ZeroVector;
 
 	float ArmLengthTo = 0.0f;
+	FRotator ControllerRotation = FRotator::ZeroRotator;
 	FRotator ArmRotationTo = FRotator::ZeroRotator;
 	float ArmLengthSpeed = 0.0f;
 	float ArmRotationSpeed = 0.0f;

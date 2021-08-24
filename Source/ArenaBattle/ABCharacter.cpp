@@ -35,7 +35,7 @@ AABCharacter::AABCharacter()
 
 	SetControlMode(EControlMode::GTA);
 
-	ArmLengthSpeed = 3.0f;
+	ArmLengthSpeed = 4.0f;
 	ArmRotationSpeed = 10.0f;
 }
 
@@ -75,7 +75,7 @@ void AABCharacter::SetControlMode(EControlMode NewControlMode)
 		SpringArm->bInheritRoll = false;
 		SpringArm->bInheritYaw = false;
 		SpringArm->bDoCollisionTest = false;
-		bUseControllerRotationYaw = false;
+		bUseControllerRotationYaw = true;
 		GetCharacterMovement()->bOrientRotationToMovement = false;
 		GetCharacterMovement()->bUseControllerDesiredRotation = true;
 		GetCharacterMovement()->RotationRate = FRotator(0.0f, 720.0f, 0.0f);
@@ -89,21 +89,27 @@ void AABCharacter::SetControlMode(EControlMode NewControlMode)
 void AABCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	ControllerRotation = GetControlRotation();
+	ABLOG(Warning, TEXT("x: %f y: %f z: %f"), ControllerRotation.Pitch, ControllerRotation.Yaw, ControllerRotation.Roll);
+
 	SpringArm->TargetArmLength = FMath::FInterpTo(SpringArm->TargetArmLength, ArmLengthTo, DeltaTime, ArmLengthSpeed);
+
+
 	switch(CurrentControlMode)
 	{
 	case EControlMode::DIABLO:
-		if(DirectionToMove.SizeSquared()>0.0f)
+		SpringArm->SetRelativeRotation(FMath::RInterpTo(SpringArm->GetRelativeRotation(), ArmRotationTo, DeltaTime, ArmRotationSpeed));
+		if (DirectionToMove.SizeSquared() > 0.0f)
 		{
 			GetController()->SetControlRotation(FRotationMatrix::MakeFromX(DirectionToMove).Rotator());
 			AddMovementInput(DirectionToMove);
 		}
-
-		SpringArm->SetRelativeRotation(FMath::RInterpTo(SpringArm->GetRelativeRotation(), ArmRotationTo, DeltaTime, ArmRotationSpeed));
+		
 		break;
 	default:
 		return;
 	}
+  
 }
 
 // Called to bind functionality to input
@@ -169,10 +175,12 @@ void AABCharacter::Turn(float NewAxisValue)
 	{
 	case EControlMode::GTA:
 		AddControllerYawInput(NewAxisValue);
+		
 		break;
 	default:
 		return;
-	}
+
+	}	
 }
 
 void AABCharacter::ViewChange()
