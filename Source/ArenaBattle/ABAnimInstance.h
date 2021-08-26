@@ -16,9 +16,12 @@ class ARENABATTLE_API UABAnimInstance : public UAnimInstance
 public:
 	UABAnimInstance();
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
+	void PlayAttackMontage();
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 		float CurrentPawnSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 		bool IsInAir;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
+		UAnimMontage* AttackMontage;
 };

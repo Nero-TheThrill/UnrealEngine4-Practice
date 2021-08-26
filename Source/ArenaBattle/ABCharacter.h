@@ -39,6 +39,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void PostInitializeComponents() override;
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -47,11 +49,19 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 		UCameraComponent* Camera;
+private:
+    void UpDown(float NewAxisValue);
+    void LeftRight(float NewAxisValue);
+    void LookUp(float NewAxisValue);
+    void Turn(float NewAxisValue);
+    void ViewChange();
+    void Attack();
 
-    private:
-		void UpDown(float NewAxisValue);
-		void LeftRight(float NewAxisValue);
-		void LookUp(float NewAxisValue);
-		void Turn(float NewAxisValue);
-		void ViewChange();
+    UFUNCTION()
+        void OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted);
+
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+		bool IsAttacking;
+	UPROPERTY()
+		class UABAnimInstance* ABAnim;
 };
