@@ -13,7 +13,7 @@ struct FABCharacterData:public FTableRowBase
 {
     GENERATED_BODY()
 public:
-	FABCharacterData(): Level(1), MaxHP(100.0f), Attack(10.0f),DropExp(10),NextExp(30){}
+	FABCharacterData(): Level(1), MaxHP(100.0f), Attack(1.0f),DropExp(10),NextExp(30){}
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "data")
 		int32 Level;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "data")
