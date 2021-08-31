@@ -18,4 +18,9 @@ public:
 
 private:
 	TWeakObjectPtr<class UABCharacterStatComponent> CurrentCharacterStat;
+	UPROPERTY()
+	    class UProgressBar* HPProgressBar;
+protected:
+	virtual void NativeConstruct() override;
+	void UpdateHPWidget();
 };
